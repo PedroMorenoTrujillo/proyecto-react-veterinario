@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import uuid from "uuid";
 
+const stateInicial = {
+  cita: {
+    mascota: "",
+    propietario: "",
+    fecha: "",
+    hora: "",
+    sintomas: ""
+  },
+  error: false
+};
 class NuevaCita extends Component {
-  state = {
-    cita: {
-      mascota: "",
-      propietario: "",
-      fecha: "",
-      hora: "",
-      sintomas: ""
-    },
-    error: false
-  };
+  state = { ...stateInicial };
   //Cuando el usuario escribe en los input
   handleChange = e => {
     //colocar lo que el usuario escribe en el state
@@ -50,6 +51,11 @@ class NuevaCita extends Component {
 
     //agregar la cita al state de App
     this.props.crearNuevaCita(nuevaCita);
+
+    //colocar en el state el stateInicial
+    this.setState({
+      ...stateInicial
+    });
   };
 
   render() {
